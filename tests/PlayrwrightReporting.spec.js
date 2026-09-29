@@ -41,7 +41,7 @@ To generate the report: npx allure generate allure-results --clean -o allure-rep
 To open the report:npx allure open allure-report
 */
 
-test.only('Playwright Reporting', async ({ page }) => {
+test('Playwright Reporting', async ({ page }) => {
 
     await page.goto('https://www.automationpracticehub.com/');
     await expect(page).toHaveURL('https://www.automationpracticehub.com/');
