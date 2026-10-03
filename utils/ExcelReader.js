@@ -4,7 +4,7 @@ import path from 'path';//this is inbuilt inside node.js
 export class Excelreader {
     static readExcelFile(Filename, Sheetname) {
         //we are defining the path of the file
-        const filePath = path.join(__dirname, '../Data', Filename)
+        const filePath = path.join(__dirname, '../test-data', Filename)
         //read excel file
         const workBook = XLSX.readFile(filePath)
         //get the sheetName

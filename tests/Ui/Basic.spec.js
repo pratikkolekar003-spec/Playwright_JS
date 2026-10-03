@@ -1,12 +1,14 @@
 import { test, expect } from '@playwright/test';
 
+
+
 test('first test case', async ({ page }) => {
 
     await page.goto('https://www.automationpracticehub.com/');
     await expect(page).toHaveURL('https://www.automationpracticehub.com/');
 
-    const userName = page.locator('#username');
-    const passWord = page.locator('#password');
+    const userName = page.getByRole('textbox', {name: 'Username'});
+    const passWord = page.getByRole('textbox', {name: 'Password'});
 
     await userName.fill('sagesyntaxacademy');
     await passWord.fill('BuildingExcellence@111');

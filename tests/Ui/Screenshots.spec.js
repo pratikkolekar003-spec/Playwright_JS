@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { userData } from '../../Data/userData';
+import { userData } from '../../test-data/userData';
 import { Excelreader } from '../../utils/ExcelReader';
 import { PropertyReader } from '../../utils/PropertyReader';
 import { ScreenshotUtil } from '../../utils/Screenshots';
