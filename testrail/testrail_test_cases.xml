@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite>
+    <id>S1</id>
+    <name>Automation Practice Hub - Manual Test Cases</name>
+    <description>Comprehensive manual test cases converted from Playwright JavaScript automation testing project for Automation Practice Hub and Reqres API.</description>
+    <sections>
+        <section>
+            <name>UI Testing</name>
+            <description>User interface and workflow tests for Automation Practice Hub web application</description>
+            <sections>
+                <section>
+                    <name>Authentication</name>
+                    <description>Login, credentials validation, Page Object Model integration, and data-driven login scenarios</description>
+                    <cases>
+                        <case>
+                            <id>TC-UI-AUTH-01</id>
+                            <title>Verify User Login with Valid Credentials (Standard Flow)</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Smoke</type>
+                            <priority>Critical</priority>
+                            <estimate>180s</estimate>
+                            <references>tests/Ui/Basic.spec.js, tests/Ui/Login.spec.js</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. Web browser (Chrome/Edge/Firefox) is installed and has internet connectivity.
+2. Web application is live and accessible at https://www.automationpracticehub.com/
+3. Valid credentials are available:
+   - Username: sagesyntaxacademy
+   - Password: BuildingExcellence@111</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Navigate to application URL: https://www.automationpracticehub.com/</content>
+                                        <expected>Login page loads successfully and the address bar displays https://www.automationpracticehub.com/</expected>
+                                    </step>
+                                    <step>
+                                        <content>Locate the 'Username' input field and enter 'sagesyntaxacademy'</content>
+                                        <expected>Username text field accepts and displays 'sagesyntaxacademy'</expected>
+                                    </step>
+                                    <step>
+                                        <content>Locate the 'Password' input field and enter 'BuildingExcellence@111'</content>
+                                        <expected>Password field accepts input masked as bullets/dots</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click on the 'I Agree to the' Terms and Conditions checkbox</content>
+                                        <expected>Checkbox state changes to checked (selected)</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click the 'Sign In' button</content>
+                                        <expected>Authentication request succeeds and the user is redirected to the dashboard/home screen without errors</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-UI-AUTH-02</id>
+                            <title>Verify Field Value Retention and POM Component Flow during Login</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Functional</type>
+                            <priority>High</priority>
+                            <estimate>120s</estimate>
+                            <references>tests/Ui/POMLogin.spec.js, pages/Login.ts</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. Application is online at https://www.automationpracticehub.com/
+2. Valid credentials known: sagesyntaxacademy / BuildingExcellence@111</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Open login page via Page Object initialization (Loginpage.navigateToLoginPage)</content>
+                                        <expected>Browser navigates to https://www.automationpracticehub.com/</expected>
+                                    </step>
+                                    <step>
+                                        <content>Enter Username 'sagesyntaxacademy' and Password 'BuildingExcellence@111'</content>
+                                        <expected>Input fields are populated with given test data</expected>
+                                    </step>
+                                    <step>
+                                        <content>Verify element values for usernameField and passwordField prior to form submission</content>
+                                        <expected>usernameField has value 'sagesyntaxacademy'; passwordField has value 'BuildingExcellence@111'</expected>
+                                    </step>
+                                    <step>
+                                        <content>Check Terms &amp; Conditions and click 'Sign In' button</content>
+                                        <expected>Sign In is executed cleanly without client-side error notifications</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-UI-AUTH-03</id>
+                            <title>Verify Landing Page Title after Successful Sign-In</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Functional</type>
+                            <priority>Medium</priority>
+                            <estimate>120s</estimate>
+                            <references>tests/Ui/PlayrwrightReporting.spec.js</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. User is on login page https://www.automationpracticehub.com/</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Navigate to https://www.automationpracticehub.com/ and enter valid credentials</content>
+                                        <expected>Username and Password inputs are populated</expected>
+                                    </step>
+                                    <step>
+                                        <content>Check 'I Agree to the' checkbox and click 'Sign In'</content>
+                                        <expected>User successfully logs into the application</expected>
+                                    </step>
+                                    <step>
+                                        <content>Inspect the browser document title (document.title)</content>
+                                        <expected>Page title strictly equals: "Automation Practice Hub : A Sage Syntax Academy's product"</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-UI-AUTH-04</id>
+                            <title>Verify Authentication using External Config and Excel Test Data</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Functional</type>
+                            <priority>Medium</priority>
+                            <estimate>180s</estimate>
+                            <references>tests/Ui/LoggerTestCase.spec.js, tests/Ui/ReausableTest.spec.js, tests/Ui/Screenshots.spec.js</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. Configuration file (config/global.properties) defines BASE_URL=https://www.automationpracticehub.com/
+2. Excel sheet (test-data/userData.xlsx, sheet 'userDataSheet1') contains valid test records.</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Read BASE_URL from configuration and navigate browser to the application</content>
+                                        <expected>Browser loads configured URL https://www.automationpracticehub.com/</expected>
+                                    </step>
+                                    <step>
+                                        <content>Retrieve username from userData.js and password from userData.xlsx</content>
+                                        <expected>Data parsed accurately: username='sagesyntaxacademy', password='BuildingExcellence@111'</expected>
+                                    </step>
+                                    <step>
+                                        <content>Populate username and password inputs with extracted values and verify values</content>
+                                        <expected>Fields match extracted values exactly</expected>
+                                    </step>
+                                    <step>
+                                        <content>Select terms checkbox and click 'Sign In'</content>
+                                        <expected>Sign In request succeeds</expected>
+                                    </step>
+                                    <step>
+                                        <content>Log test execution steps and capture screenshots before and after submission</content>
+                                        <expected>Screenshots and audit logs are recorded for verification</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                    </cases>
+                </section>
+                <section>
+                    <name>Forms</name>
+                    <description>Input validation, interactive widgets, date/time pickers, dynamic fields, and file upload tests</description>
+                    <cases>
+                        <case>
+                            <id>TC-UI-FORM-01</id>
+                            <title>Verify Standard Text and Numeric Input Fields Submission with Dialog Confirmations</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Functional</type>
+                            <priority>Critical</priority>
+                            <estimate>300s</estimate>
+                            <references>tests/Ui/FormsPage.spec.js#L21-L55</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. User is signed in to https://www.automationpracticehub.com/
+2. User is navigated to the 'Forms' page via clicking 'Forms' navigation heading</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>In 'Enter your name' textbox, type 'Pratik K'</content>
+                                        <expected>Name field accepts and displays 'Pratik K'</expected>
+                                    </step>
+                                    <step>
+                                        <content>In 'Enter password' textbox, type 'Pk@123456'</content>
+                                        <expected>Password field accepts masked input</expected>
+                                    </step>
+                                    <step>
+                                        <content>In 'example@email.com' textbox, type 'pratik.k@test.com'</content>
+                                        <expected>Email field accepts valid email format</expected>
+                                    </step>
+                                    <step>
+                                        <content>In 'Enter age' spinbutton field, enter '30'</content>
+                                        <expected>Age field displays numerical value 30</expected>
+                                    </step>
+                                    <step>
+                                        <content>In '+91 999999xxxx' telephone field, enter '9996663331'</content>
+                                        <expected>Phone field displays 9996663331</expected>
+                                    </step>
+                                    <step>
+                                        <content>In 'https://example.com' URL field, enter 'https://forms_example.com'</content>
+                                        <expected>URL field accepts valid URL string</expected>
+                                    </step>
+                                    <step>
+                                        <content>In 'Search something...' searchbox, enter 'Search something abour formsInput'</content>
+                                        <expected>Search input accepts text query</expected>
+                                    </step>
+                                    <step>
+                                        <content>In 'message' textarea, enter 'Forms fill up successfully.'</content>
+                                        <expected>Message textarea accepts multiline text</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click the 'Submit' button</content>
+                                        <expected>Browser confirmation prompt appears with message: "Are you sure, you want to submit the form"</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click OK/Accept on the confirmation prompt</content>
+                                        <expected>Second confirmation prompt appears with message: "Form submitted successfully : )"</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click OK/Accept on the second confirmation prompt</content>
+                                        <expected>Dialog is dismissed; form submission completes cleanly</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-UI-FORM-02</id>
+                            <title>Verify Date, Time, Month, and Datetime-Local Picker Fields</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Functional</type>
+                            <priority>Medium</priority>
+                            <estimate>180s</estimate>
+                            <references>tests/Ui/FormsPage.spec.js#L57-L68</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. User is signed in and navigated to Forms page</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Click on the Date input field ([type="date"]) and select a valid date</content>
+                                        <expected>Date picker popup opens and displays selected date</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click on the Time input field ([type="time"]) and enter '22:45'</content>
+                                        <expected>Time picker updates to 22:45 (10:45 PM)</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click on the Month input field ([type="month"]) and enter '2026-10'</content>
+                                        <expected>Month picker updates to October 2026</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click on the Datetime-local field ([type="datetime-local"]) and enter '2026-10-12T22:45'</content>
+                                        <expected>Datetime-local field populates with 2026-10-12T22:45</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-UI-FORM-03</id>
+                            <title>Verify Color Picker Selection and Slider Range Value Adjustment</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Functional</type>
+                            <priority>Low</priority>
+                            <estimate>120s</estimate>
+                            <references>tests/Ui/FormsPage.spec.js#L70-L82</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. User is signed in and navigated to Forms page</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Locate 'Choose Color' color picker input and set hex color '#f001f4'</content>
+                                        <expected>Color picker accepts value '#f001f4' and visual swatch changes to purple/magenta</expected>
+                                    </step>
+                                    <step>
+                                        <content>Verify that the color picker value attribute equals '#f001f4'</content>
+                                        <expected>Value matches '#f001f4'</expected>
+                                    </step>
+                                    <step>
+                                        <content>Locate 'Select Range' slider control and adjust slider value to '81'</content>
+                                        <expected>Slider thumb moves to 81% position</expected>
+                                    </step>
+                                    <step>
+                                        <content>Verify that the range slider element value equals '81'</content>
+                                        <expected>Value matches '81'</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-UI-FORM-04</id>
+                            <title>Verify Selection Controls (Checkboxes, Radio, Standard Select, and Custom Dropdown)</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Functional</type>
+                            <priority>High</priority>
+                            <estimate>240s</estimate>
+                            <references>tests/Ui/FormsPage.spec.js#L84-L110</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. User is signed in and navigated to Forms page</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Check 'Accept Terms &amp; Conditions' checkbox</content>
+                                        <expected>Checkbox state changes to checked (selected)</expected>
+                                    </step>
+                                    <step>
+                                        <content>Check 'Subscribe to Newsletter' checkbox</content>
+                                        <expected>Checkbox state changes to checked (selected)</expected>
+                                    </step>
+                                    <step>
+                                        <content>Uncheck / ensure 'Receive Product Updates' checkbox is unchecked</content>
+                                        <expected>Checkbox is unselected</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click 'Automation Testing' radio button</content>
+                                        <expected>Radio button is selected; other radio options in group become unselected</expected>
+                                    </step>
+                                    <step>
+                                        <content>In '#testing-level' standard combo box, select 'Advanced'</content>
+                                        <expected>Combo box value updates to 'Advanced'</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click custom React language dropdown ('.css-hlgwow') and select 'English'</content>
+                                        <expected>Dropdown menu reveals options and 'English' is selected and displayed</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-UI-FORM-05</id>
+                            <title>Verify Action Buttons and JavaScript Alert Dialog Triggers</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Functional</type>
+                            <priority>Medium</priority>
+                            <estimate>180s</estimate>
+                            <references>tests/Ui/FormsPage.spec.js#L112-L145</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. User is signed in and navigated to Forms page</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>In 'Enter Something' text field, enter 'About button inputs' and verify field value</content>
+                                        <expected>Field contains 'About button inputs'</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click the 'Submit Form' button</content>
+                                        <expected>JavaScript alert appears with message: "Form submitted successfully!"</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click OK to accept the alert dialog</content>
+                                        <expected>Alert dialog dismisses cleanly</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click the 'Click me' button</content>
+                                        <expected>JavaScript alert appears with message: "Button Clicked!"</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click OK to accept the alert dialog</content>
+                                        <expected>Alert dialog dismisses cleanly</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click the 'Submit Image' button</content>
+                                        <expected>JavaScript alert appears with message: "Image button clicked!"</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click OK to accept the alert dialog</content>
+                                        <expected>Alert dialog dismisses cleanly</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-UI-FORM-06</id>
+                            <title>Verify Dynamic Field Generation via Dropdown and Value Entry</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Functional</type>
+                            <priority>Medium</priority>
+                            <estimate>180s</estimate>
+                            <references>tests/Ui/FormsPage.spec.js#L147-L159</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. User is signed in and navigated to Forms page</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>In '#input-type' select dropdown, choose 'datetime-local'</content>
+                                        <expected>Dropdown displays 'datetime-local'</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click the 'Add Field' button</content>
+                                        <expected>A new dynamic input element with placeholder 'datetime-local input' is rendered</expected>
+                                    </step>
+                                    <step>
+                                        <content>In the dynamic input field, enter '2026-10-12T22:45'</content>
+                                        <expected>Field accepts the entered timestamp</expected>
+                                    </step>
+                                    <step>
+                                        <content>Verify that the dynamic input value matches '2026-10-12T22:45'</content>
+                                        <expected>Dynamic field value equals '2026-10-12T22:45'</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-UI-FORM-07</id>
+                            <title>Verify File Upload Control and Confirmation Dialog</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Functional</type>
+                            <priority>High</priority>
+                            <estimate>180s</estimate>
+                            <references>tests/Ui/FormsPage.spec.js#L161-L176</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. User is signed in and navigated to Forms page.
+2. Test file 'uploadfile/playwright-upload-test.txt' is ready on machine.</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Locate file input element '#file-upload-input' and attach file 'uploadfile/playwright-upload-test.txt'</content>
+                                        <expected>File is chosen and attached to the file input</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click the '#upload-files-button' (Upload Files button)</content>
+                                        <expected>JavaScript alert appears displaying: "1 file uploaded successfully."</expected>
+                                    </step>
+                                    <step>
+                                        <content>Click OK on the alert dialog</content>
+                                        <expected>Alert dialog dismisses and file upload is completed</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                    </cases>
+                </section>
+            </sections>
+        </section>
+        <section>
+            <name>API Testing</name>
+            <description>REST API test cases targeting Reqres API endpoints</description>
+            <sections>
+                <section>
+                    <name>User Management</name>
+                    <description>CRUD operations on users resource</description>
+                    <cases>
+                        <case>
+                            <id>TC-API-USER-01</id>
+                            <title>Verify Retrieval of Paginated User List via GET /api/users?page=1</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Automated</type>
+                            <priority>High</priority>
+                            <estimate>120s</estimate>
+                            <references>tests/API/GETRequest.spec.js</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. REST API endpoint https://reqres.in is reachable</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Send an HTTP GET request to https://reqres.in/api/users?page=1</content>
+                                        <expected>Request completes with HTTP status code 200 OK</expected>
+                                    </step>
+                                    <step>
+                                        <content>Verify that the response body is formatted as valid JSON with pagination fields</content>
+                                        <expected>Response body contains: 'page', 'per_page', 'total', 'total_pages', and 'data' array</expected>
+                                    </step>
+                                    <step>
+                                        <content>Inspect and validate the first object in the 'data' array (data[0])</content>
+                                        <expected>Assertions succeed:
+- id == 1
+- email == 'george.bluth@reqres.in'
+- first_name == 'George'
+- last_name == 'Bluth'</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-API-USER-02</id>
+                            <title>Verify User Creation via POST /api/users</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Automated</type>
+                            <priority>High</priority>
+                            <estimate>120s</estimate>
+                            <references>tests/API/POSTRequest.spec.js</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. REST API endpoint https://reqres.in is reachable</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Set request headers to 'Content-Type: application/json' and prepare payload:
+{
+  "name": "Name 1",
+  "email": "Name1@example.com",
+  "job": "Automation Test Engineer"
+}</content>
+                                        <expected>JSON request body is properly formatted</expected>
+                                    </step>
+                                    <step>
+                                        <content>Send HTTP POST request to https://reqres.in/api/users with payload</content>
+                                        <expected>Server responds with HTTP status code 201 Created</expected>
+                                    </step>
+                                    <step>
+                                        <content>Parse response JSON and validate attributes: name, email, job, id, createdAt</content>
+                                        <expected>Response body confirms:
+- name == 'Name 1'
+- email == 'Name1@example.com'
+- job == 'Automation Test Engineer'
+- id is generated
+- createdAt timestamp is populated</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                        <case>
+                            <id>TC-API-USER-03</id>
+                            <title>Verify User Details Update via /api/users/2</title>
+                            <template>Test Case (Steps)</template>
+                            <type>Automated</type>
+                            <priority>Medium</priority>
+                            <estimate>120s</estimate>
+                            <references>tests/API/PUTRequest.spec.js</references>
+                            <custom>
+                                <automation_type><id>1</id><value>None</value></automation_type>
+                                <preconds>1. REST API endpoint https://reqres.in is reachable
+2. User with ID 2 exists</preconds>
+                                <steps_separated>
+                                    <step>
+                                        <content>Set request headers to 'Content-Type: application/json' and prepare payload:
+{
+  "name": "morpheus",
+  "job": "zion resident",
+  "email": "xyz@example.com"
+}</content>
+                                        <expected>Payload formatted properly</expected>
+                                    </step>
+                                    <step>
+                                        <content>Send HTTP request to https://reqres.in/api/users/2 with payload</content>
+                                        <expected>Server responds with HTTP status code 201 (or 200)</expected>
+                                    </step>
+                                    <step>
+                                        <content>Parse response JSON and validate attributes: name, email, job</content>
+                                        <expected>Response body confirms updated fields:
+- name == 'morpheus'
+- email == 'xyz@example.com'
+- job == 'zion resident'</expected>
+                                    </step>
+                                </steps_separated>
+                            </custom>
+                        </case>
+                    </cases>
+                </section>
+            </sections>
+        </section>
+    </sections>
+</suite>

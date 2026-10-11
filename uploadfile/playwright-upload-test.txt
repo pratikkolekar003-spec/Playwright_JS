@@ -1,0 +1,7 @@
+Playwright File Upload Test
+
+This is a sample file created for testing file upload functionality.
+
+Test Name: Forms Page - File Upload
+Application: Automation Practice Hub
+Purpose: Verify that a user can select and upload a file successfully.

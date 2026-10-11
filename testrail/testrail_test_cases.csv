@@ -1,0 +1,186 @@
+"Section","Title","Type","Priority","Estimate","Preconditions","Steps","Expected Result","Automation Type","References"
+"UI Testing > Authentication","Verify User Login with Valid Credentials (Standard Flow)","Smoke","Critical","3m","1. Web browser is installed and connected to internet.
+2. Target URL is accessible: https://www.automationpracticehub.com/
+3. Valid credentials are available:
+   - Username: sagesyntaxacademy
+   - Password: BuildingExcellence@111","1. Navigate to https://www.automationpracticehub.com/
+2. Verify that the application landing page is displayed and URL is https://www.automationpracticehub.com/
+3. Locate the 'Username' field and enter 'sagesyntaxacademy'
+4. Locate the 'Password' field and enter 'BuildingExcellence@111'
+5. Select the 'I Agree to the' Terms and Conditions checkbox
+6. Click the 'Sign In' button","1. Login page loads successfully.
+2. Current URL matches https://www.automationpracticehub.com/.
+3. Username field accepts and retains 'sagesyntaxacademy'.
+4. Password field accepts 'BuildingExcellence@111' (masked for security).
+5. Checkbox is checked.
+6. Authentication succeeds and the user is redirected to the application dashboard/portal.","Automated","tests/Ui/Basic.spec.js, tests/Ui/Login.spec.js"
+"UI Testing > Authentication","Verify Field Value Retention and POM Component Flow during Login","Functional","High","2m","1. Login page is accessible at https://www.automationpracticehub.com/
+2. Valid credentials are known: sagesyntaxacademy / BuildingExcellence@111","1. Access the login page via Page Object Model helper (Loginpage.navigateToLoginPage)
+2. Enter 'sagesyntaxacademy' into the Username input field
+3. Enter 'BuildingExcellence@111' into the Password input field
+4. Validate that the input fields retain their typed values before submission
+5. Check 'I Agree to the' checkbox and click 'Sign In' button","1. Login page loads properly.
+2. Username field is filled with 'sagesyntaxacademy'.
+3. Password field is filled with 'BuildingExcellence@111'.
+4. Field assertions pass: usernameField has value 'sagesyntaxacademy' and passwordField has value 'BuildingExcellence@111'.
+5. User is signed in without form validation errors.","Automated","tests/Ui/POMLogin.spec.js, pages/Login.ts"
+"UI Testing > Authentication","Verify Landing Page Title after Successful Sign-In","Functional","Medium","2m","1. User is on https://www.automationpracticehub.com/
+2. Valid credentials available","1. Navigate to https://www.automationpracticehub.com/
+2. Enter Username 'sagesyntaxacademy' and Password 'BuildingExcellence@111'
+3. Check the 'I Agree to the' checkbox
+4. Click 'Sign In' button
+5. Inspect the document browser title post authentication","1. Application loads.
+2. Credentials entered into respective fields.
+3. Checkbox is marked as checked.
+4. Sign In initiates authentication and navigates to the landing screen.
+5. Page title strictly equals: ""Automation Practice Hub : A Sage Syntax Academy's product"".","Automated","tests/Ui/PlayrwrightReporting.spec.js"
+"UI Testing > Authentication","Verify Authentication using External Config and Excel Test Data","Functional","Medium","3m","1. Configuration file (config/global.properties) defines BASE_URL=https://www.automationpracticehub.com/.
+2. Excel sheet (test-data/userData.xlsx, sheet 'userDataSheet1') contains valid user credentials.","1. Read BASE_URL from config/global.properties and navigate to application
+2. Read username from userData.js and password from userData.xlsx (sheet userDataSheet1)
+3. Enter read username and password into respective fields
+4. Validate input values match external data
+5. Check 'I Agree to the' checkbox and click 'Sign In'
+6. Capture visual screenshot and execution logs for audit trail","1. Browser navigates to configured BASE_URL.
+2. Test data loaded correctly from external sources.
+3. Input fields populated with external data.
+4. Username field has value 'sagesyntaxacademy' and Password has value 'BuildingExcellence@111'.
+5. User signs in successfully.
+6. Execution log records navigation and sign-in status; screenshot is captured.","Automated","tests/Ui/LoggerTestCase.spec.js, tests/Ui/ReausableTest.spec.js, tests/Ui/Screenshots.spec.js"
+"UI Testing > Forms","Verify Standard Text and Numeric Input Fields Submission with Dialog Confirmations","Functional","Critical","5m","1. User is authenticated at https://www.automationpracticehub.com/
+2. User is on the 'Forms' page (navigated via 'Forms' header)","1. In 'Enter your name' field, type 'Pratik K'
+2. In 'Enter password' field, type 'Pk@123456'
+3. In 'example@email.com' field, type 'pratik.k@test.com'
+4. In 'Enter age' spinbutton field, enter '30'
+5. In '+91 999999xxxx' field, enter '9996663331'
+6. In 'https://example.com' field, enter 'https://forms_example.com'
+7. In 'Search something...' field, enter 'Search something abour formsInput'
+8. In 'message' textarea, enter 'Forms fill up successfully.'
+9. Click the 'Submit' button
+10. Observe and handle the first confirmation dialog prompt
+11. Observe and handle the subsequent confirmation dialog","1. Name field accepts 'Pratik K'.
+2. Password field accepts 'Pk@123456' (masked).
+3. Email field accepts valid email format.
+4. Age spinbutton displays '30'.
+5. Phone field accepts 10-digit number.
+6. URL field accepts valid URL string.
+7. Search field accepts search query.
+8. Message field accepts multiline text.
+9. Form triggers submission confirmation dialog.
+10. Confirm dialog displays message: ""Are you sure, you want to submit the form"". User accepts.
+11. Second confirm dialog displays message: ""Form submitted successfully : )"". User accepts. Form finishes submission cleanly.","Automated","tests/Ui/FormsPage.spec.js:21-55"
+"UI Testing > Forms","Verify Date, Time, Month, and Datetime-Local Picker Fields","Functional","Medium","3m","1. User is authenticated and navigated to Forms page","1. Click on the Date input field ([type=""date""]) and pick a valid date
+2. Click on the Time input field ([type=""time""]) and enter '22:45'
+3. Click on the Month input field ([type=""month""]) and enter '2026-10'
+4. Click on the Datetime-local input field ([type=""datetime-local""]) and enter '2026-10-12T22:45'","1. Date picker opens and displays selected date.
+2. Time picker updates to '22:45' (10:45 PM).
+3. Month picker updates to 'October 2026' (value: '2026-10').
+4. Datetime-local field correctly populates with '2026-10-12T22:45'.","Automated","tests/Ui/FormsPage.spec.js:57-68"
+"UI Testing > Forms","Verify Color Picker Selection and Slider Range Value Adjustment","Functional","Low","2m","1. User is authenticated and navigated to Forms page","1. Locate 'Choose Color' color picker input
+2. Set hex color code '#f001f4'
+3. Verify the color picker reflects the new color
+4. Locate 'Select Range' slider input
+5. Drag slider or set value to '81'
+6. Verify the slider retains the updated value","1. Color input element is interactive.
+2. Color value is updated to magenta/purple (#f001f4).
+3. Field value equals '#f001f4'.
+4. Range slider is adjustable.
+5. Slider thumb position updates to 81.
+6. Slider value equals '81'.","Automated","tests/Ui/FormsPage.spec.js:70-82"
+"UI Testing > Forms","Verify Selection Controls (Checkboxes, Radio, Standard Select, and Custom Dropdown)","Functional","High","4m","1. User is authenticated and navigated to Forms page","1. Select the 'Accept Terms & Conditions' checkbox
+2. Select the 'Subscribe to Newsletter' checkbox
+3. Deselect/Ensure 'Receive Product Updates' checkbox is unchecked
+4. Select the 'Automation Testing' radio button
+5. In '#testing-level' standard dropdown, select 'Advanced'
+6. Click the custom React language dropdown ('.css-hlgwow') and select 'English'","1. 'Accept Terms & Conditions' checkbox is checked.
+2. 'Subscribe to Newsletter' checkbox is checked.
+3. 'Receive Product Updates' checkbox is unchecked.
+4. 'Automation Testing' radio button is selected and active.
+5. '#testing-level' dropdown selects and displays 'Advanced'.
+6. 'English' is selected and visible in the language selector.","Automated","tests/Ui/FormsPage.spec.js:84-110"
+"UI Testing > Forms","Verify Action Buttons and JavaScript Alert Dialog Triggers","Functional","Medium","3m","1. User is authenticated and navigated to Forms page","1. In 'Enter Something' text field, enter 'About button inputs'
+2. Click the 'Submit Form' button
+3. Inspect and accept the alert dialog
+4. Click the 'Click me' button
+5. Inspect and accept the alert dialog
+6. Click the 'Submit Image' button
+7. Inspect and accept the alert dialog","1. Text field holds 'About button inputs'.
+2. Form submit alert appears with text: ""Form submitted successfully!"".
+3. Alert is accepted and dismissed.
+4. Button alert appears with text: ""Button Clicked!"".
+5. Alert is accepted and dismissed.
+6. Image button alert appears with text: ""Image button clicked!"".
+7. Alert is accepted and dismissed.","Automated","tests/Ui/FormsPage.spec.js:112-145"
+"UI Testing > Forms","Verify Dynamic Field Generation via Dropdown and Value Entry","Functional","Medium","3m","1. User is authenticated and navigated to Forms page","1. In '#input-type' select dropdown, choose 'datetime-local'
+2. Click the 'Add Field' button
+3. Verify that a dynamic input element with placeholder 'datetime-local input' is added to the DOM
+4. In the generated dynamic field, enter '2026-10-12T22:45'
+5. Verify the dynamic field retains the entered value","1. 'datetime-local' is selected from the dropdown.
+2. Form triggers dynamic input field creation.
+3. New input field with placeholder 'datetime-local input' is rendered and editable.
+4. Field accepts '2026-10-12T22:45'.
+5. Dynamic input field value equals '2026-10-12T22:45'.","Automated","tests/Ui/FormsPage.spec.js:147-159"
+"UI Testing > Forms","Verify File Upload Control and Confirmation Dialog","Functional","High","3m","1. User is authenticated and navigated to Forms page.
+2. Test file 'uploadfile/playwright-upload-test.txt' exists on the local filesystem.","1. Locate file input element '#file-upload-input'
+2. Attach file 'uploadfile/playwright-upload-test.txt'
+3. Click '#upload-files-button' (Upload Files button)
+4. Verify JavaScript alert dialog message
+5. Accept the alert dialog","1. File input element is available.
+2. File 'playwright-upload-test.txt' is attached.
+3. Upload request is submitted.
+4. Alert dialog appears displaying: ""1 file uploaded successfully."".
+5. Alert is dismissed and file upload finishes cleanly.","Automated","tests/Ui/FormsPage.spec.js:161-176"
+"API Testing > User Management","Verify Retrieval of Paginated User List via GET /api/users?page=1","Automated","High","2m","1. REST API endpoint https://reqres.in is online and reachable.","1. Send an HTTP GET request to https://reqres.in/api/users?page=1
+2. Verify HTTP response status code
+3. Parse the JSON response body
+4. Validate the attributes of the first user in the data array (data[0]):
+   - id equals 1
+   - email equals 'george.bluth@reqres.in'
+   - first_name equals 'George'
+   - last_name equals 'Bluth'","1. GET request dispatches successfully.
+2. HTTP status code is 200 OK.
+3. Response body is valid JSON containing pagination metadata (page, per_page, total, total_pages, data).
+4. Assertions succeed:
+   - data[0].id == 1
+   - data[0].email == 'george.bluth@reqres.in'
+   - data[0].first_name == 'George'
+   - data[0].last_name == 'Bluth'.","Automated","tests/API/GETRequest.spec.js"
+"API Testing > User Management","Verify User Creation via POST /api/users","Automated","High","2m","1. REST API endpoint https://reqres.in is reachable.","1. Prepare JSON payload:
+   {
+     ""name"": ""Name 1"",
+     ""email"": ""Name1@example.com"",
+     ""job"": ""Automation Test Engineer""
+   }
+2. Send HTTP POST request to https://reqres.in/api/users with header Content-Type: application/json
+3. Verify HTTP response status code
+4. Parse response JSON body and validate created user attributes:
+   - name equals 'Name 1'
+   - email equals 'Name1@example.com'
+   - job equals 'Automation Test Engineer'
+   - id is generated
+   - createdAt timestamp is present","1. Payload constructed properly.
+2. POST request dispatched to server.
+3. HTTP status code is 201 Created.
+4. Response body confirms user creation:
+   - responseJson.name == 'Name 1'
+   - responseJson.email == 'Name1@example.com'
+   - responseJson.job == 'Automation Test Engineer'
+   - id and createdAt are returned.","Automated","tests/API/POSTRequest.spec.js"
+"API Testing > User Management","Verify User Details Update via /api/users/2","Automated","Medium","2m","1. REST API endpoint https://reqres.in is reachable.
+2. Target user with ID 2 exists in Reqres.","1. Prepare JSON payload:
+   {
+     ""name"": ""morpheus"",
+     ""job"": ""zion resident"",
+     ""email"": ""xyz@example.com""
+   }
+2. Send HTTP request to https://reqres.in/api/users/2 with header Content-Type: application/json
+3. Verify HTTP response status code
+4. Parse response JSON body and validate updated attributes:
+   - name equals 'morpheus'
+   - email equals 'xyz@example.com'
+   - job equals 'zion resident'","1. Payload constructed properly.
+2. Request dispatched to endpoint.
+3. HTTP status code is 201 (or 200).
+4. Response body confirms updated attributes:
+   - responseJson.name == 'morpheus'
+   - responseJson.email == 'xyz@example.com'
+   - responseJson.job == 'zion resident'.","Automated","tests/API/PUTRequest.spec.js"
